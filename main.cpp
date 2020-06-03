@@ -155,7 +155,7 @@ Mat_<uchar> compute_disparity(const Mat_<uchar> &img1, uint64 **census_left, uin
                 }
             }
 
-            result_img(i, j) = linear_interpolation(disparity, 0, 50, 0, 255);
+            result_img(i, j) = disparity;
         }
     }
 
@@ -182,6 +182,7 @@ Mat_<uchar> compute_disparity(const Mat_<uchar> &img1, uint64 **census_left, uin
 
 float check_error(const Mat_<uchar> &result, const Mat_<uchar> &ground_truth) {
     int sum = 0, threshold = 2;
+    ground_truth /= 4;
 
     for (int i = 0; i < result.rows; ++i) {
         for (int j = 0; j < result.cols; ++j) {
